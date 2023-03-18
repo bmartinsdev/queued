@@ -21,15 +21,17 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "dev": "tsc --watch",
+    "dev:test": "jest --runInBand --watch",
     "build": "tsc",
-    "test": "tsc",
+    "test": "jest --runInBand --watchAll=false",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "lint": "eslint --fix --ignore-path .eslintignore --ext .js,.ts .",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -61,6 +63,6 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{ts,js,json,html}": "npm run prettier"
+    "*.{ts,js,json,html}": "npm run lint && npm run format"
   }
 }
