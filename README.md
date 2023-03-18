@@ -1,4 +1,4 @@
-# Queued
+# queue-limit
 
 > Queueing tasks with concurrency control
 
@@ -7,3 +7,12 @@
 ```sh
 npm i queued 
 ```
+
+## Usage
+```sh
+import Queue from 'queue-limit';
+
+```
+
+## API
+
