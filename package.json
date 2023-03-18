@@ -1,0 +1,32 @@
+{
+  "name": "queued",
+  "version": "1.0.0",
+  "description": "Queueing tasks with concurrency control",
+  "keywords": [
+    "promise",
+    "queue",
+    "limit",
+    "limited",
+    "concurrent",
+    "concurrency",
+    "batch",
+    "priority",
+    "job",
+    "task",
+    "async",
+    "await",
+    "promises"
+  ],
+  "main": "index",
+  "module": "index.mjs",
+  "scripts": {
+    "test": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmartinsdev/queued.git"
+  },
+  "author": "Bruno Rodrigues",
+  "license": "MIT",
+  "type": "module"
+}
