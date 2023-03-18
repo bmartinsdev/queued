@@ -1,1 +1,1 @@
-export const first = () => 'works';
+export const first = (): string => 'works'
