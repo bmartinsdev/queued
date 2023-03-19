@@ -30,8 +30,8 @@ const res = await new Queued(tasks).all()
 
 ### Roadmap
 
-[x] promise all
-[x] concurrency control
-[ ] call onUpdate callback
-[ ] test coverage for onUpdate callback
-[ ] API docs
+- [x] promise all
+- [x] concurrency control
+- [ ] call onUpdate callback
+- [ ] test coverage for onUpdate callback
+- [ ] API docs
