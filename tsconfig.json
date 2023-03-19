@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "target": "es5",
+    "target": "es2016",
     "module": "commonjs",
     "declaration": true,
     "outDir": "lib",
@@ -10,7 +10,8 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src"
+    "src",
+    "test"
   ],
   "exclude": ["node_modules"]
 }
