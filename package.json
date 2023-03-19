@@ -1,6 +1,6 @@
 {
   "name": "queue-limit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Queueing tasks with concurrency control",
   "keywords": [
     "promise",
@@ -25,9 +25,9 @@
     "build": "tsc",
     "test": "jest --runInBand --watchAll=false",
     "lint": "eslint --fix --ignore-path .eslintignore --ext .ts .",
-    "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "git add -A src",
+    "prepublishOnly": "npm test && npm run lint && rm -rf lib/* && tsc",
     "postversion": "git push && git push --tags",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
