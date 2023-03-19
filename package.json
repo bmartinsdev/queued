@@ -26,9 +26,9 @@
     "test": "jest --runInBand --watchAll=false",
     "lint": "eslint --fix --ignore-path .eslintignore --ext .ts .",
     "preversion": "npm run lint",
+    "postversion": "git push && git push --tags",
     "version": "git add -A src",
     "prepublishOnly": "npm test && npm run lint && rm -rf lib/* && tsc",
-    "postversion": "git push && git push --tags",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
