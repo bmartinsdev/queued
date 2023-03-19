@@ -1,7 +1,8 @@
 src
+test
 tsconfig.json
 tslint.json
 .husky
 .eslintignore
-.eslintrc.cjs
+.eslintrc
 .prettierrc

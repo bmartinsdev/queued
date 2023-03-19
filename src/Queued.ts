@@ -3,12 +3,12 @@ import { QueueInfo, type QueuedOptions } from './Types'
 export class Queued {
   private limit = 0
   private retry = 0
-  private queue: Map<unknown | Promise<unknown>, QueueInfo> = new Map()
+  private queue: Map<CallableFunction, QueueInfo> = new Map()
   private stopOnFail = true
   private onUpdate: CallableFunction
   private onFinish: CallableFunction
 
-  constructor(tasks: (unknown | Promise<unknown>)[], options?: QueuedOptions) {
+  constructor(tasks: CallableFunction[], options?: QueuedOptions) {
     for (const task of tasks) {
       this.queue.set(task, { retried: 0, status: 'queued' })
     }
@@ -19,14 +19,15 @@ export class Queued {
     if (options.onUpdate) this.onUpdate = options.onUpdate
   }
 
-  private async runJob(task: unknown) {
+  private async runTask(task: CallableFunction) {
     this.queue.get(task).status = 'processing'
 
     // call task
-    Promise.resolve(task)
+    task()
       .then(res => {
         this.queue.get(task).result = res
         this.queue.get(task).status = 'complete'
+        
         this.checkIfFinished()
       })
       .catch(res => {
@@ -42,14 +43,21 @@ export class Queued {
   }
 
   private async processQueue() {
-    const concurrent = this.limit || this.queue.size
-    let jobs = 0
-
+    const processing = [];
+    
     for (const task of this.queue.keys()) {
-      if (this.queue.get(task).status === 'queued') {
-        if (jobs < concurrent) {
-          this.runJob(task)
-          jobs++
+      if (this.queue.get(task).status === 'processing') {
+        processing.push(task);
+      }
+    }
+    
+    let spots = !this.limit ? this.queue.size : this.limit - processing.length;
+    
+    if(spots){
+      for (const task of this.queue.keys()) {
+        if (this.queue.get(task).status === 'queued' && spots) {
+          this.runTask(task);
+          spots--
         }
       }
     }
@@ -76,15 +84,6 @@ export class Queued {
 
   private getCompletedTasks(): unknown[] {
     return Array.from(this.queue.values()).map((task: QueueInfo) => task.result)
-  }
-
-  some(): Promise<unknown[]> {
-    this.stopOnFail = true
-    this.processQueue()
-
-    return new Promise(
-      resolve => (this.onFinish = () => resolve(this.getCompletedTasks()))
-    )
   }
 
   all(): Promise<unknown[]> {

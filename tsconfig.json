@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "target": "es2016",
-    "module": "commonjs",
+    "module": "ES6",
+    "target": "ES5",
+    "lib": ["ES2020"],
+    "downlevelIteration": true,
     "declaration": true,
+    "moduleResolution": "node",
     "outDir": "lib",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src",
-    "test"
+    "src"
   ],
   "exclude": ["node_modules"]
 }

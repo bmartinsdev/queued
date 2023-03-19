@@ -24,11 +24,10 @@
     "dev:test": "jest --runInBand --watch",
     "build": "tsc",
     "test": "jest --runInBand --watchAll=false",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "lint": "eslint --fix --ignore-path .eslintignore --ext .ts .",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
+    "version": "git add -A src",
     "postversion": "git push && git push --tags",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
@@ -59,6 +58,6 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{ts,js,json,html}": "npm run lint && npm run format"
+    "*.{ts,js,json,html}": "npm run lint"
   }
 }
