@@ -5,7 +5,7 @@ Lightweight package to handle multiple async calls with rate limiting.
 ## Install
 
 ```sh
-npm i queued 
+npm i queue-limit
 ```
 
 
@@ -25,10 +25,3 @@ const tasks = [
 const res = await new Queued(tasks).all()
 
 ```
-
-## Roadmap
-
-- [x] promise all
-- [x] concurrency control
-- [x] call onUpdate callback
-- [x] test coverage for onUpdate callback
