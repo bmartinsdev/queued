@@ -1,6 +1,6 @@
 {
   "name": "queue-limit",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "Queueing tasks with concurrency control",
   "keywords": [
     "promise",
