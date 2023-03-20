@@ -1,16 +1,14 @@
 # queue-limit
 
-> Queueing tasks with concurrency control
-
 Lightweight package to handle multiple async calls with rate limiting
 
-### Install
+## Install
 
 ```sh
 npm i queued 
 ```
 
-### Usage
+## Usage
 ```sh
 import { Queued } from 'queue-limit';
 
