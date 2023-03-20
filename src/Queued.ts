@@ -25,19 +25,33 @@ export class Queued {
     // call task
     task()
       .then(res => {
+        // update task info
         this.queue.get(task).result = res
         this.queue.get(task).status = 'complete'
         
+        // call onUpdate if provided
+        if(typeof this.onUpdate === 'function'){
+          this.onUpdate(this.queue.get(task))
+        }
+
         this.checkIfFinished()
       })
       .catch(res => {
+        // update task info
         this.queue.get(task).result = res
         this.queue.get(task).retried = this.queue.get(task).retried++
+
+        // call onUpdate if provided
+        if(typeof this.onUpdate === 'function'){
+          this.onUpdate(this.queue.get(task))
+        }
+
         if (this.queue.get(task).retried >= this.retry) {
           this.queue.get(task).status = 'failed'
         } else {
           this.queue.get(task).status = 'queued'
         }
+
         this.checkIfFinished()
       })
   }
@@ -45,15 +59,18 @@ export class Queued {
   private async processQueue() {
     const processing = [];
     
+    // get processing tasks
     for (const task of this.queue.keys()) {
       if (this.queue.get(task).status === 'processing') {
         processing.push(task);
       }
     }
     
+    // get available spots, if limit not set, return all
     let spots = !this.limit ? this.queue.size : this.limit - processing.length;
     
     if(spots){
+      // queue available spots
       for (const task of this.queue.keys()) {
         if (this.queue.get(task).status === 'queued' && spots) {
           this.runTask(task);

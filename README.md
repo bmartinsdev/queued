@@ -1,6 +1,6 @@
 # queue-limit
 
-Lightweight package to handle multiple async calls with rate limiting
+Lightweight package to handle multiple async calls with rate limiting.
 
 ## Install
 
@@ -8,7 +8,9 @@ Lightweight package to handle multiple async calls with rate limiting
 npm i queued 
 ```
 
+
 ## Usage
+
 ```sh
 import { Queued } from 'queue-limit';
 
@@ -24,12 +26,9 @@ const res = await new Queued(tasks).all()
 
 ```
 
-### API
-
-### Roadmap
+## Roadmap
 
 - [x] promise all
 - [x] concurrency control
-- [ ] call onUpdate callback
-- [ ] test coverage for onUpdate callback
-- [ ] API docs
+- [x] call onUpdate callback
+- [x] test coverage for onUpdate callback
